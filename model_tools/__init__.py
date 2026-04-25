@@ -10,9 +10,10 @@ This package provides shared utilities used across model sub-projects:
 __version__ = "0.1.0"
 __author__ = "Alex & Claude <python@iitsp.com.au>"
 
+# Import submodules for convenient access
 from . import dataprep
 from . import analysis
 from . import viz
 from . import io
 
-__all__ = ["dataprep", "analysis", "viz", "io"]
+__all__ = ["__version__", "dataprep", "analysis", "viz", "io"]
