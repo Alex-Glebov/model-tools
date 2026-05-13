@@ -4,40 +4,38 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "model-tools"
-dynamic = ["version"]
-description = "Shared utilities for ML model development"
-authors = [
-    {name = "Alex & Claude", email = "python@iitsp.com.au"}
-]
+version = "0.1.1"
+description = "Diagnostics, analysis, and visualization for ML model development"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
+authors = [
+    {name = "Alex & Claude", email = "python@iitsp.com.au"},
 ]
 dependencies = [
     "numpy>=1.24.0",
     "pandas>=2.0.0",
     "matplotlib>=3.7.0",
     "pyyaml>=6.0",
+    "homebrewlibra[io]>=0.2.4",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+tests = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
 ]
 
 [project.urls]
 Homepage = "https://github.com/Alex-Glebov/model-tools"
 Repository = "https://github.com/Alex-Glebov/model-tools.git"
 
-[tool.setuptools.dynamic]
-version = {attr = "model_tools.__version__"}
-
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["model_tools*"]
+exclude = ["tests*", "test*", "wiki*"]

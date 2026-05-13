@@ -1,19 +1,19 @@
 """Model Tools - Shared utilities for ML model development.
 
 This package provides shared utilities used across model sub-projects:
-- dataprep: Data preparation and transformation
 - analysis: Metrics computation and data analysis
 - viz: Visualization and plotting
 - io: File I/O utilities
+
+Data preparation (sliding window, standardize, split) lives in data-prep.
+Model-specific tensor loading lives in model-core.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "Alex & Claude <python@iitsp.com.au>"
 
-# Import submodules for convenient access
-from . import dataprep
 from . import analysis
 from . import viz
 from . import io
 
-__all__ = ["__version__", "dataprep", "analysis", "viz", "io"]
+__all__ = ["__version__", "analysis", "viz", "io"]
