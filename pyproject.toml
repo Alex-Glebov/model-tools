@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "model-tools"
+name = "model-tools-ml"
 version = "0.1.2"
 description = "Diagnostics, analysis, and visualization for ML model development"
 readme = "README.md"

@@ -12,7 +12,7 @@ Model-specific tensor loading lives in model-core.
 from importlib.metadata import version, PackageNotFoundError
 
 try:
-    __version__ = version("model-tools")
+    __version__ = version("model-tools-ml")
 except PackageNotFoundError:  # pragma: no cover
     __version__ = "unknown"
 
