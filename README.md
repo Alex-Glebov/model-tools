@@ -16,7 +16,10 @@ This package provides utilities used across model sub-projects:
 ## Installation
 
 ```bash
-# From model-tools directory
+# From PyPI
+pip install model-tools-ml
+
+# Editable (local)
 pip install -e .
 
 # With tests
@@ -34,6 +37,7 @@ model_tools/
 │   └── analyze_chains.py
 ├── viz/           # Visualization
 │   ├── plot_metrics.py
+│   ├── plot_price_peaks.py
 │   └── market_plots.py
 └── io/            # I/O wrappers (homebrewlibra)
 ```
@@ -42,7 +46,7 @@ model_tools/
 
 ```python
 import model_tools
-print(model_tools.__version__)  # 0.1.1
+print(model_tools.__version__)  # 0.1.3
 
 # Analysis
 from model_tools.analysis import analyze_all_chains
@@ -61,7 +65,7 @@ pytest tests/ -v
 
 ## Version
 
-`0.1.1` — defined in `pyproject.toml`.
+`0.1.3` — defined in `pyproject.toml`.
 
 ## Author
 

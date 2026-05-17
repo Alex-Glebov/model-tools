@@ -1,3 +1,9 @@
+v0.1.3, 2026-05-17 --
+         Rename standalone_plot_peaks.py → plot_price_peaks.py.
+         plot_peaks() → plot_price_peaks() returning the input DataFrame
+         for chain compatibility in data-prep pipelines.
+         Add detach parameter for non-blocking display via subprocess.
+
 v0.1.2, 2026-05-17 --
          Version housekeeping: __version__ now reads from importlib.metadata.
          Moved CLI entry-point main() routines out of library modules

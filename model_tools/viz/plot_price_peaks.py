@@ -4,11 +4,14 @@ Expects columns: timestamp, price, peaks_line.
 """
 from __future__ import annotations
 
+import multiprocessing
+from typing import Optional
+
 import pandas as pd
 
 
-def plot_peaks(df: pd.DataFrame, title: str = "", save_path: str | None = None):
-    """Plot price + peaks_line overlay."""
+def _plot_price_peaks_impl(df: pd.DataFrame, title: str, save_path: Optional[str]):
+    """Shared plotting implementation (runs in main or child process)."""
     import matplotlib
     if save_path:
         matplotlib.use("Agg")
@@ -50,3 +53,28 @@ def plot_peaks(df: pd.DataFrame, title: str = "", save_path: str | None = None):
         plt.show()
 
 
+def plot_price_peaks(
+    df: pd.DataFrame,
+    title: str = "",
+    save_path: Optional[str] = None,
+    detach: bool = False,
+) -> pd.DataFrame:
+    """Plot price + peaks_line overlay.
+
+    Args:
+        df: DataFrame with timestamp, price, and optional peaks_line / peaks columns.
+        title: Plot title.
+        save_path: If given, save to file instead of displaying interactively.
+        detach: When True, spawn the plot in a separate process so the caller
+            does not block on ``plt.show()``. Ignored when ``save_path`` is set.
+
+    Returns:
+        The same *df* passed in, so the function can be chained in data-prep
+        pipelines (e.g. ``df = plot_price_peaks(df, ...)``).
+    """
+    if detach:
+        p = multiprocessing.Process(target=_plot_price_peaks_impl, args=(df, title, save_path))
+        p.start()
+    else:
+        _plot_price_peaks_impl(df, title, save_path)
+    return df

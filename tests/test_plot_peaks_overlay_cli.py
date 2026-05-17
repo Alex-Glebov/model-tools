@@ -11,7 +11,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from model_tools.viz.standalone_plot_peaks import plot_peaks
+from model_tools.viz.plot_price_peaks import plot_price_peaks
 
 
 def main() -> int:
@@ -27,7 +27,7 @@ def main() -> int:
 
     df = pd.read_feather(args.file).sort_values("timestamp").reset_index(drop=True)
     print(f"Loaded {len(df):,} rows")
-    plot_peaks(df, title=args.title, save_path=args.save)
+    plot_price_peaks(df, title=args.title, save_path=args.save)
     return 0
 
 
