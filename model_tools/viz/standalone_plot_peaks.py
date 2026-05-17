@@ -1,16 +1,8 @@
 """Plot trade data with zigzag peaks overlay.
 
-Usage:
-    python plot_peaks.py /path/to/trades.feather           # interactive display
-    python plot_peaks.py /path/to/trades.feather --save output.png
-
 Expects columns: timestamp, price, peaks_line.
 """
 from __future__ import annotations
-
-import argparse
-import sys
-from pathlib import Path
 
 import pandas as pd
 
@@ -58,22 +50,3 @@ def plot_peaks(df: pd.DataFrame, title: str = "", save_path: str | None = None):
         plt.show()
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Plot trades with zigzag peaks")
-    parser.add_argument("file", help="Path to feather file")
-    parser.add_argument("--save", "-o", help="Save plot to file instead of displaying")
-    parser.add_argument("--title", "-t", default="", help="Plot title")
-    args = parser.parse_args()
-
-    if not Path(args.file).exists():
-        print(f"File not found: {args.file}")
-        return 1
-
-    df = pd.read_feather(args.file).sort_values("timestamp").reset_index(drop=True)
-    print(f"Loaded {len(df):,} rows")
-    plot_peaks(df, title=args.title, save_path=args.save)
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())

@@ -61,7 +61,7 @@ pytest tests/ -v
 
 ## Version
 
-`0.1.1` — defined in `model_tools/__init__.py`.
+`0.1.1` — defined in `pyproject.toml`.
 
 ## Author
 

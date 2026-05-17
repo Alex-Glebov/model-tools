@@ -1,0 +1,10 @@
+v0.1.2, 2026-05-17 --
+         Version housekeeping: __version__ now reads from importlib.metadata.
+         Moved CLI entry-point main() routines out of library modules
+         into tests/ runners so library files no longer contain
+         unguarded argparse / if __name__ blocks.
+
+v0.1.1, 2026-05-13 --
+         Initial release with analysis, viz, and io modules.
+         Chain-length analysis for window-size determination.
+         Training metrics plotting and market peak visualization.

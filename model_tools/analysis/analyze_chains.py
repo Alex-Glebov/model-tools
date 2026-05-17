@@ -4,7 +4,6 @@
 A chain is a contiguous sequence of rows with the same 'pair' value.
 """
 
-import argparse
 import logging
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -102,68 +101,3 @@ def analyze_all_chains(data_path: Path, pattern: str = "*.feather") -> Tuple[int
     mean_length = np.mean(lengths)
 
     return min_length, max_length, mean_length, all_lengths
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Analyze target data chains to find minimum sequence length"
-    )
-    parser.add_argument(
-        "--data-path",
-        type=str,
-        default="~/rawdata/csv/trg_final",
-        help="Path to target data directory (default: ~/rawdata/csv/trg_final)"
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        default=None,
-        help="Optional: save chain lengths to JSON file"
-    )
-
-    args = parser.parse_args()
-    logger = setup_logging()
-
-    data_path = Path(args.data_path).expanduser()
-    logger.info(f"Analyzing chains in: {data_path}")
-
-    min_len, max_len, mean_len, all_lengths = analyze_all_chains(data_path)
-
-    logger.info("=" * 50)
-    logger.info(f"Chain Length Statistics:")
-    logger.info(f"  Total chains: {len(all_lengths)}")
-    logger.info(f"  Min length: {min_len}")
-    logger.info(f"  Max length: {max_len}")
-    logger.info(f"  Mean length: {mean_len:.2f}")
-    logger.info("=" * 50)
-
-    # Show shortest chains
-    logger.info("\nShortest chains (first 10):")
-    sorted_chains = sorted(all_lengths.items(), key=lambda x: x[1])
-    for chain_id, length in sorted_chains[:10]:
-        logger.info(f"  {chain_id}: {length}")
-
-    # Show longest chains
-    logger.info("\nLongest chains (first 10):")
-    for chain_id, length in sorted_chains[-10:]:
-        logger.info(f"  {chain_id}: {length}")
-
-    if args.output:
-        import json
-        with open(args.output, 'w') as f:
-            json.dump({
-                "statistics": {
-                    "total_chains": len(all_lengths),
-                    "min_length": int(min_len),
-                    "max_length": int(max_len),
-                    "mean_length": float(mean_len)
-                },
-                "chains": all_lengths
-            }, f, indent=2)
-        logger.info(f"\nSaved detailed results to: {args.output}")
-
-    logger.info(f"\nRecommended window_size: {min_len}")
-
-
-if __name__ == "__main__":
-    main()
