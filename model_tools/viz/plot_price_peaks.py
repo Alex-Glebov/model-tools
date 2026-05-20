@@ -10,7 +10,9 @@ from typing import Optional
 import pandas as pd
 
 
-def _plot_price_peaks_impl(ddf: pd.DataFrame, title: str, save_path: Optional[str]):
+def _plot_price_peaks_impl(ddf: pd.DataFrame, title: str, save_path: Optional[str],
+                           **kwargs,
+                          )->dict:
     """Shared plotting implementation (runs in main or child process)."""
     import matplotlib
     if save_path:
@@ -52,13 +54,17 @@ def _plot_price_peaks_impl(ddf: pd.DataFrame, title: str, save_path: Optional[st
     else:
         plt.show()
 
+    return {'ddf':ddf}
+
 
 def plot_price_peaks(
     ddf: pd.DataFrame,
     title: str = "",
     save_path: Optional[str] = None,
     detach: bool = False,
-) -> pd.DataFrame:
+    **kwargs,
+    )-> dict:
+#   )-> pd.DataFrame:
     """Plot price + peaks_line overlay.
 
     Args:
@@ -77,4 +83,4 @@ def plot_price_peaks(
         p.start()
     else:
         _plot_price_peaks_impl(ddf, title, save_path)
-    return ddf
+    return {'ddf':ddf}

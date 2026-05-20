@@ -17,7 +17,9 @@ except ImportError:
     sys.exit(1)
 
 
-def plot_training_history(config_path: Path, output_path: Path = None):
+def plot_training_history(config_path: Path, output_path: Path = None,
+                          **kwargs,
+                          )->dict:
     """Plot training history from config file.
 
     Args:
@@ -39,7 +41,7 @@ def plot_training_history(config_path: Path, output_path: Path = None):
 
     if not loss:
         print("No loss data in history")
-        return
+        return {'Nothing':None}
 
     epochs = list(range(1, len(loss) + 1))
 
@@ -111,4 +113,4 @@ Min Val Loss: {min_val}"""
         print(f"Min val loss:     {min(val_loss):.4f} (epoch {val_loss.index(min(val_loss)) + 1})")
     print(f"{'='*50}")
 
-
+    return{'history':history}
