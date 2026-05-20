@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "model-tools-ml"
-version = "0.1.4"
+version = "0.1.5"
 description = "Diagnostics, analysis, and visualization for ML model development"
 readme = "README.md"
 license = "MIT"
